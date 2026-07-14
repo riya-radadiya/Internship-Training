@@ -1,9 +1,9 @@
 
 
-import Counter from "./Counter";
+import Todo from "./Todo";
 
 function App() {
-  return <Counter />;
+  return <Todo />;
 }
 
 export default App;
