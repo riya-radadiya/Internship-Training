@@ -1,47 +1,44 @@
 
 
-import './App.css';
+import Recipe from "./Recipe";
 
 function App() {
   return (
-    <div style={{ textAlign: "center", marginTop: "40px" }}>
-      <h1>JSX and React Elements Practical</h1>
+    <div style={{ padding: "20px" }}>
+      <h1>🍽 Recipe Book</h1>
 
-      {/* HTML converted to JSX */}
-      <section>
-        <h2>Welcome to React</h2>
-        <p>This is an example of HTML converted into JSX.</p>
+      <Recipe
+        title="Veg Sandwich"
+        ingredients={[
+          "Bread",
+          "Butter",
+          "Tomato",
+          "Cucumber",
+          "Cheese"
+        ]}
+        instructions="Spread butter on bread, add vegetables and cheese, then grill for 5 minutes."
+      />
 
-        <button onClick={() => alert("Hello from React!")}>
-          Click Me
-        </button>
-      </section>
+      <Recipe
+        title="Mango Shake"
+        ingredients={[
+          "Mango",
+          "Milk",
+          "Sugar",
+          "Ice Cubes"
+        ]}
+        instructions="Blend all ingredients together and serve chilled."
+      />
 
-      <hr />
-
-      {/* User Profile Card */}
-      <div
-        style={{
-          width: "300px",
-          margin: "20px auto",
-          border: "1px solid #ccc",
-          borderRadius: "10px",
-          padding: "20px",
-          boxShadow: "0 4px 8px rgba(0,0,0,0.2)"
-        }}
-      >
-        <img
-          src="https://via.placeholder.com/120"
-          alt="Profile"
-          style={{ borderRadius: "50%" }}
-        />
-
-        <h2>Riya Radadiya</h2>
-        <p>React Developer Intern</p>
-        <p>Email: riya@example.com</p>
-
-        <button>View Profile</button>
-      </div>
+      <Recipe
+        title="Maggi"
+        ingredients={[
+          "Maggi Noodles",
+          "Water",
+          "Tastemaker"
+        ]}
+        instructions="Boil water, add noodles and tastemaker, cook for 2 minutes."
+      />
     </div>
   );
 }
