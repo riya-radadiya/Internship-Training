@@ -1,122 +1,50 @@
-import { useState, useEffect } from "react";
+import React from "react";
 
 function App() {
-  const [bookmarks, setBookmarks] = useState([]);
-  const [title, setTitle] = useState("");
-  const [url, setUrl] = useState("");
-  const [editId, setEditId] = useState(null);
+  const appName =
+    process.env.REACT_APP_APP_NAME || "Default App";
 
-  useEffect(() => {
-    const data = JSON.parse(localStorage.getItem("bookmarks")) || [];
-    setBookmarks(data);
-  }, []);
+  const api =
+    process.env.REACT_APP_API_URL || "No API URL";
 
-  useEffect(() => {
-    localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
-  }, [bookmarks]);
+  const version =
+    process.env.REACT_APP_VERSION || "1.0";
 
-  const handleSubmit = () => {
-    if (!title || !url) {
-      alert("Please fill all fields");
-      return;
-    }
-
-    if (editId !== null) {
-      setBookmarks(
-        bookmarks.map((item) =>
-          item.id === editId ? { ...item, title, url } : item
-        )
-      );
-      setEditId(null);
-    } else {
-      setBookmarks([
-        ...bookmarks,
-        {
-          id: Date.now(),
-          title,
-          url,
-        },
-      ]);
-    }
-
-    setTitle("");
-    setUrl("");
-  };
-
-  const handleEdit = (bookmark) => {
-    setTitle(bookmark.title);
-    setUrl(bookmark.url);
-    setEditId(bookmark.id);
-  };
-
-  const handleDelete = (id) => {
-    setBookmarks(bookmarks.filter((item) => item.id !== id));
-  };
+  const mode =
+    process.env.REACT_APP_MODE || "Development";
 
   return (
-    <div style={{ width: "500px", margin: "30px auto" }}>
-      <h1>Bookmark Manager</h1>
-
-      <input
-        type="text"
-        placeholder="Website Name"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-      />
-
-      <br />
-      <br />
-
-      <input
-        type="text"
-        placeholder="https://example.com"
-        value={url}
-        onChange={(e) => setUrl(e.target.value)}
-      />
-
-      <br />
-      <br />
-
-      <button onClick={handleSubmit}>
-        {editId ? "Update Bookmark" : "Add Bookmark"}
-      </button>
+    <div
+      style={{
+        width: "500px",
+        margin: "40px auto",
+        textAlign: "center",
+        fontFamily: "Arial",
+      }}
+    >
+      <h1>{appName}</h1>
 
       <hr />
 
-      {bookmarks.map((bookmark) => (
-        <div
-          key={bookmark.id}
-          style={{
-            border: "1px solid gray",
-            padding: "10px",
-            marginBottom: "10px",
-          }}
-        >
-          <h3>{bookmark.title}</h3>
+      <h3>Environment Variables</h3>
 
-          <a
-            href={bookmark.url}
-            target="_blank"
-            rel="noreferrer"
-          >
-            {bookmark.url}
-          </a>
+      <p>
+        <strong>API URL:</strong>
+        <br />
+        {api}
+      </p>
 
-          <br />
-          <br />
+      <p>
+        <strong>Version:</strong>
+        <br />
+        {version}
+      </p>
 
-          <button onClick={() => handleEdit(bookmark)}>
-            Edit
-          </button>
-
-          <button
-            onClick={() => handleDelete(bookmark.id)}
-            style={{ marginLeft: "10px" }}
-          >
-            Delete
-          </button>
-        </div>
-      ))}
+      <p>
+        <strong>Mode:</strong>
+        <br />
+        {mode}
+      </p>
     </div>
   );
 }
