@@ -1,25 +1,37 @@
 "use client";
 
-import { Suspense, lazy } from "react";
-import ErrorBoundary from "./components/ErrorBoundary";
-import FocusInput from "./components/FocusInput";
+import { useState } from "react";
 
-const HeavyComponent = lazy(() => import("./components/HeavyComponent"));
+const messages = {
+  en: {
+    title: "Welcome",
+    description: "This is an internationalized Next.js app.",
+  },
+  hi: {
+    title: "स्वागत है",
+    description: "यह एक बहुभाषी Next.js एप्लिकेशन है।",
+  },
+};
 
 export default function Home() {
+  const [language, setLanguage] = useState<"en" | "hi">("en");
+
   return (
-    <main style={{ padding: "20px" }}>
-      <h1>React Advanced Concepts</h1>
+    <main style={{ padding: 30 }}>
+      <h1>{messages[language].title}</h1>
 
-      <ErrorBoundary>
-        <Suspense fallback={<p>Loading...</p>}>
-          <HeavyComponent />
-        </Suspense>
+      <p>{messages[language].description}</p>
 
-        <br />
+      <button onClick={() => setLanguage("en")}>
+        English
+      </button>
 
-        <FocusInput />
-      </ErrorBoundary>
+      <button
+        onClick={() => setLanguage("hi")}
+        style={{ marginLeft: 10 }}
+      >
+        हिंदी
+      </button>
     </main>
   );
 }
