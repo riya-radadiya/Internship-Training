@@ -1,37 +1,109 @@
-import { Routes, Route, Link } from "react-router-dom";
+import React, {
+  useState,
+  useEffect,
+  useMemo,
+  useCallback,
+  useRef,
+} from "react";
 
-import Home from "./pages/Home";
-import About from "./pages/About";
-import Contact from "./pages/Contact";
-import Dashboard from "./pages/Dashboard";
-import User from "./pages/User";
-import NotFound from "./pages/NotFound";
+import { ThemeContext } from "./ThemeContext";
+import useWindowWidth from "./useWindowWidth";
 
 function App() {
+  // useState
+  const [count, setCount] = useState(0);
+
+  // useEffect
+  useEffect(() => {
+    document.title = `Count: ${count}`;
+  }, [count]);
+
+  // useMemo
+  const square = useMemo(() => {
+    console.log("Calculating...");
+    return count * count;
+  }, [count]);
+
+  // useCallback
+  const showMessage = useCallback(() => {
+    alert("useCallback executed!");
+  }, []);
+
+  // useRef
+  const inputRef = useRef();
+
+  const focusInput = () => {
+    inputRef.current.focus();
+  };
+
+  // useContext
+  const theme = "light";
+
+  // Custom Hook
+  const width = useWindowWidth();
+
   return (
-    <div style={{ textAlign: "center", marginTop: "30px" }}>
-      <h1>React Router Demo</h1>
+    <ThemeContext.Provider value={theme}>
+      <div style={{ padding: "20px", fontFamily: "Arial" }}>
+        <h1>React Hooks Practical</h1>
 
-      <nav>
-        <Link to="/">Home</Link> |{" "}
-        <Link to="/about">About</Link> |{" "}
-        <Link to="/contact">Contact</Link> |{" "}
-        <Link to="/dashboard">Dashboard</Link> |{" "}
-        <Link to="/user/101">User</Link>
-      </nav>
+        <hr />
 
-      <hr />
+        <h2>useState</h2>
 
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/user/:id" element={<User />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </div>
+        <h3>{count}</h3>
+
+        <button onClick={() => setCount(count + 1)}>
+          Increment
+        </button>
+
+        <hr />
+
+        <h2>useMemo</h2>
+
+        <p>Square = {square}</p>
+
+        <hr />
+
+        <h2>useCallback</h2>
+
+        <button onClick={showMessage}>
+          Click Me
+        </button>
+
+        <hr />
+
+        <h2>useRef</h2>
+
+        <input
+          ref={inputRef}
+          placeholder="Type here"
+        />
+
+        <button onClick={focusInput}>
+          Focus Input
+        </button>
+
+        <hr />
+
+        <h2>useContext</h2>
+
+        <ThemeDisplay />
+
+        <hr />
+
+        <h2>Custom Hook</h2>
+
+        <p>Window Width: {width}px</p>
+      </div>
+    </ThemeContext.Provider>
   );
+}
+
+function ThemeDisplay() {
+  const theme = React.useContext(ThemeContext);
+
+  return <h3>Current Theme: {theme}</h3>;
 }
 
 export default App;
