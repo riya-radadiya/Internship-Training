@@ -1,14 +1,37 @@
-import FilterableProductTable from "./FilterableProductTable";
+import { Routes, Route, Link } from "react-router-dom";
 
-const PRODUCTS = [
-  { category: "Fruits", price: "$1", stocked: true, name: "Apple" },
-  { category: "Fruits", price: "$1", stocked: true, name: "Dragonfruit" },
-  { category: "Fruits", price: "$2", stocked: false, name: "Passionfruit" },
-  { category: "Vegetables", price: "$2", stocked: true, name: "Spinach" },
-  { category: "Vegetables", price: "$4", stocked: false, name: "Pumpkin" },
-  { category: "Vegetables", price: "$1", stocked: true, name: "Peas" },
-];
+import Home from "./pages/Home";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
+import Dashboard from "./pages/Dashboard";
+import User from "./pages/User";
+import NotFound from "./pages/NotFound";
 
-export default function App() {
-  return <FilterableProductTable products={PRODUCTS} />;
+function App() {
+  return (
+    <div style={{ textAlign: "center", marginTop: "30px" }}>
+      <h1>React Router Demo</h1>
+
+      <nav>
+        <Link to="/">Home</Link> |{" "}
+        <Link to="/about">About</Link> |{" "}
+        <Link to="/contact">Contact</Link> |{" "}
+        <Link to="/dashboard">Dashboard</Link> |{" "}
+        <Link to="/user/101">User</Link>
+      </nav>
+
+      <hr />
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/user/:id" element={<User />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </div>
+  );
 }
+
+export default App;
