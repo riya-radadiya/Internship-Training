@@ -1,13 +1,5 @@
-import UserCard from "./components/UserCard";
+import { redirect } from "next/navigation";
 
 export default function Home() {
-  return (
-    <main className="flex items-center justify-center min-h-screen">
-      <UserCard
-        name="Riya Radadiya"
-        age={21}
-        email="riya@example.com"
-      />
-    </main>
-  );
+  redirect("/login");
 }

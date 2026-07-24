@@ -1,0 +1,100 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:#f4f6fb;
+}
+
+.container{
+    width:95%;
+    max-width:1300px;
+    margin:40px auto;
+}
+
+.container h1{
+    text-align:center;
+    color:#2563eb;
+    margin-bottom:25px;
+}
+
+.search{
+    width:100%;
+    padding:12px;
+    margin-bottom:25px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    font-size:16px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    background:#fff;
+    box-shadow:0 5px 15px rgba(0,0,0,.1);
+}
+
+th{
+    background:#2563eb;
+    color:#fff;
+    padding:15px;
+}
+
+td{
+    padding:14px;
+    text-align:center;
+    border-bottom:1px solid #ddd;
+}
+
+tr:hover{
+    background:#f9f9f9;
+}
+
+.status{
+    padding:7px 14px;
+    border-radius:20px;
+    color:#fff;
+    font-weight:bold;
+}
+
+.paid{
+    background:#16a34a;
+}
+
+.pending{
+    background:#f59e0b;
+}
+
+.pay-btn{
+    background:#2563eb;
+    color:#fff;
+    border:none;
+    padding:8px 15px;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+.pay-btn:hover:not(:disabled){
+    background:#1d4ed8;
+}
+
+.pay-btn:disabled{
+    background:#9ca3af;
+    cursor:not-allowed;
+}
+
+@media(max-width:768px){
+
+table{
+    display:block;
+    overflow-x:auto;
+}
+
+.container{
+    width:98%;
+}
+
+}
